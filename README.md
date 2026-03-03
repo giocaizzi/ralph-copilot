@@ -81,7 +81,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 > **Tip — use Ralph globally across all your projects**
 >
 > Instead of copying agent files per project, point VS Code to your local clone of this repo once via
-> [![VS Code Setting](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations)
+> [![VS Code setting chat.agentFilesLocations](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations)
 > and the agents will be available everywhere.
 >
 > ```jsonc
