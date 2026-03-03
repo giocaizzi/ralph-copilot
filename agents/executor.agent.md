@@ -49,9 +49,10 @@ Work on EXACTLY what Coordinator assigned:
 - ONE task per iteration
 - Follow all acceptance criteria
 - Use appropriate tools for the language/stack
-- Read all available documentation, online and in the source code
+- Read all available documentation, fetch it online and look in the source code
 - **Use all available skills and instructions** with best practices for the language/stack
 - Make sure to always check some of the other code to understand patterns and conventions
+- No Laziness: Find root causes. No temporary fixes.
 - Write tests if specified in PRD
 
 #### Execution Tips
@@ -82,6 +83,9 @@ npm run build || uv build
 
 # Tests
 npm test || uv run pytest
+
+# Formatting
+npm run format || uv run black .
 
 # Linting
 npm run lint || uv run ruff check
