@@ -18,13 +18,13 @@ Named after Ralph Wiggum from The Simpsons - persistent iteration beats one-shot
 
 ```mermaid
 flowchart TD
-    Human["👤 Human\nCreates requirements"] --> Planner["🗂️ Planner"]
+    Human["👤 Human\Creates requirements"] --> Planner["🗂️ Planner"]
     Planner -->|"Generates"| PRD["📄 PRD.md"]
     Planner -->|"Handoff button"| Coordinator
 
     PRD --> Coordinator["🎯 Coordinator"]
-    Coordinator -->|"Spawns subagent"| Executor["⚙️ Executor\nuser-invokable: false"]
-    Executor -->|"Spawns subagent"| Reviewer["🔍 Reviewer\nuser-invokable: false"]
+    Coordinator -->|"Spawns subagent"| Executor["⚙️ Executor"]
+    Executor -->|"Spawns subagent"| Reviewer["🔍 Reviewer"]
     Reviewer -->|"Returns verdict"| Executor
     Executor -->|"Returns summary"| Coordinator
 
