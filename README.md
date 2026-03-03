@@ -1,6 +1,8 @@
 # Copilot Ralph Loop
 
-A language-agnostic implementation of the Ralph Wiggum autonomous agent loop for VSCode, using custom agents with automatic handoffs.
+A Copilot implementation of the Ralph Wiggum autonomous agent loop, using custom agents with automatic handoffs.
+
+Based only off four agents markdown files, this pattern enables an autonomous coding loop with fresh context every iteration, using the filesystem as memory and git for version control.
 
 ## What is Ralph Loop?
 
@@ -11,36 +13,6 @@ An autonomous coding pattern where:
 2. Executes it with fresh context
 3. Commits and updates progress
 4. Loops until all tasks complete
-
-## Architecture
-
-```mermaid
-flowchart TD
-    Human["👤 Requirements"] --> Planner["🗂️ Planner"]
-    Planner -->|"Generates"| PRD["📄 PRD.md"]
-    Planner -->|"Handoff button"| Coordinator
-
-    PRD --> Coordinator["🎯 Coordinator"]
-    Coordinator -->|"Spawns subagent"| Executor["⚙️ Executor"]
-    Executor -->|"Spawns subagent"| Reviewer["🔍 Reviewer"]
-    Reviewer -->|"Returns verdict"| Executor
-    Executor -->|"Returns summary"| Coordinator
-
-    Coordinator -->|"Reads / Writes"| Progress["📊 PROGRESS.md"]
-    Executor -->|"Reads / Writes"| Progress
-    Reviewer -->|"Reads"| Progress
-
-    Executor -->|"Commits"| Git["🗃️ git"]
-
-    style Human fill:#f0f0f0,stroke:#666
-    style PRD fill:#fff3cd,stroke:#856404
-    style Progress fill:#d1ecf1,stroke:#0c5460
-    style Git fill:#d4edda,stroke:#155724
-    style Planner fill:#cce5ff,stroke:#004085
-    style Coordinator fill:#e2d9f3,stroke:#4a0072
-    style Executor fill:#fce8e8,stroke:#721c24
-    style Reviewer fill:#fff0d6,stroke:#7a4f00
-```
 
 ### Execution Flow
 
