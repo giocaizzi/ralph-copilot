@@ -77,12 +77,12 @@ sequenceDiagram
 
 ## Features
 
-- ✅ **Automatic handoffs** - Agents pass control automatically
-- ✅ **Progress file** - Fresh context every iteration via PROGRESS.md
-- ✅ **Language agnostic** - Works with any programming language/stack
-- ✅ **Atomic tasks** - One task per iteration, committed immediately
-- ✅ **Context reset** - Avoids context pollution, uses filesystem as memory
-- ✅ **Built-in review** - Reviewer subagent verifies every task before moving on
+- ✅ 🤝 **Automatic handoffs** - Agents pass control automatically
+- ✅ 📊 **Progress file** - Fresh context every iteration via PROGRESS.md
+- ✅ 🌐 **Language agnostic** - Works with any programming language/stack
+- ✅ ⚛️ **Atomic tasks** - One task per iteration, committed immediately
+- ✅ 🔄 **Context reset** - Avoids context pollution, uses filesystem as memory
+- ✅ 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
 
 ## Setup
 
