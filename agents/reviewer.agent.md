@@ -3,7 +3,7 @@ name: RalphReviewer
 description: Ralph loop reviewer - verifies task completion against acceptance criteria as subagent
 user-invokable: false
 disable-model-invocation: false
-tools: ["read", "search", "web"]
+tools: ["read", "search", "web", "execute"]
 ---
 
 # Ralph Loop Reviewer

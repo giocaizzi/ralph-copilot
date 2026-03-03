@@ -6,17 +6,11 @@ disable-model-invocation: false
 tools:
   [
     "vscode",
-    "terminal",
+    "execute",
     "read",
     "edit",
     "search",
     "web",
-    "figma/*",
-    "vscode.mermaid-chat-features/renderMermaidDiagram",
-    "ms-python.python/getPythonEnvironmentInfo",
-    "ms-python.python/getPythonExecutableCommand",
-    "ms-python.python/installPythonPackage",
-    "ms-python.python/configurePythonEnvironment",
     "todo",
   ]
 ---
