@@ -1,5 +1,5 @@
 ---
-name: Executor
+name: RalphExecutor
 description: Ralph loop executor - implements tasks
 user-invokable: false
 disable-model-invocation: false

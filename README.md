@@ -12,8 +12,6 @@ An autonomous coding pattern where:
 3. Commits and updates progress
 4. Loops until all tasks complete
 
-Named after Ralph Wiggum from The Simpsons - persistent iteration beats one-shot perfection.
-
 ## Architecture
 
 ```mermaid
@@ -88,12 +86,6 @@ sequenceDiagram
 
 ## Setup
 
-### Prerequisites
-
-- VSCode 1.106+ (custom agents support)
-- Git repository initialized in your project
-- VSCode Copilot or compatible AI extension
-
 ### Installation
 
 1. Copy agent files to your project:
@@ -108,8 +100,7 @@ cp agents/*.agent.md .github/agents/
 3. Verify agents are available:
    - Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
    - Type "Select Agent"
-   - Should see: Coordinator, Executor, Planner
-   - (Reviewer is `user-invokable: false` — it won't appear in the dropdown, only used as a subagent)
+   - Should see: `RalphPlanner`, `RalphCoordinator`
 
 ## Usage
 
@@ -143,67 +134,14 @@ cp agents/*.agent.md .github/agents/
    git log --oneline -10
    ```
 
-### Manual Iteration (Human-in-the-Loop)
-
-For controlled execution:
-
-1. Coordinator selects task
-2. Click "Execute Task" handoff
-3. Executor completes task
-4. Review changes
-5. Click "Continue Loop" handoff
-6. Repeat
-
-### Fully Autonomous
-
-For overnight/background execution:
-
-1. Set `send: true` in handoff definitions (already configured)
-2. Start Coordinator
-3. Walk away
-4. Return to completed work
-
-**Note**: Monitor costs and set iteration limits in PRD.
-
-## File Structure
-
-```
-your-project/
-├── .github/
-│   └── agents/
-│       ├── coordinator.agent.md    # Task orchestrator
-│       ├── executor.agent.md       # Task implementer
-│       ├── reviewer.agent.md       # Task verifier (subagent only)
-│       └── planner.agent.md        # PRD creator
-├── PRD.md                          # Product requirements
-├── PROGRESS.md                     # Iteration state
-```
-
-### Modify Handoff Behavior
-
-In any agent file:
-
-```yaml
-handoffs:
-  - label: Custom Action
-    agent: target-agent
-    prompt: Detailed instructions
-    send: true  # Auto-submit (true) or manual (false)
-```
 
 ## Credits
 
 Based on:
 - **Ralph Wiggum** pattern by Geoffrey Huntley
-- **VSCode Custom Agents** (VSCode 1.106+)
-- **Handoffs** feature for guided workflows
-
-## License
-
-MIT - Use freely, adapt as needed
 
 ## Links
 
 - [VSCode Custom Agents Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 - [Original Ralph Pattern](https://github.com/snarktank/ralph)
-- [Ralph Loop Examples](https://www.aihero.dev/getting-started-with-ralph)
+- [Claude Code Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)

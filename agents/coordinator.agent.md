@@ -1,8 +1,8 @@
 ---
-name: Coordinator
+name: RalphCoordinator
 description: Ralph loop coordinator - manages autonomous task execution with subagents
 tools: ['vscode', 'terminal', 'read', 'agent', 'edit', 'search', 'web', 'todo']
-agents: ['Executor', 'Reviewer']
+agents: ['RalphExecutor', 'RalphReviewer']
 ---
 
 # Ralph Loop Coordinator
