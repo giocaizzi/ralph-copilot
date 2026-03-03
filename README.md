@@ -4,17 +4,14 @@ A Copilot implementation of the Ralph Wiggum autonomous agent loop, using custom
 
 <p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
 
-
-
 Based only off four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and git for version control.
-
-
 
 ## What is Ralph Loop?
 
 **Ralph loop = Fresh context + Filesystem memory**
 
 An autonomous coding pattern where:
+
 1. Agent picks a task from PRD
 2. Executes it with fresh context
 3. Commits and updates progress
@@ -85,6 +82,7 @@ cp ralph-copilot/agents/*.agent.md .github/agents/
 ### Quick Start
 
 1. **Create PRD** with Planner agent:
+
    ```
    Open VSCode Chat
    Select: Planner agent
@@ -94,6 +92,7 @@ cp ralph-copilot/agents/*.agent.md .github/agents/
 2. **Review PRD.md** - Edit as needed
 
 3. **Start Loop** with Coordinator:
+
    ```
    Select: Coordinator agent
    Click: "Start Ralph Loop" handoff button
@@ -111,6 +110,7 @@ cp ralph-copilot/agents/*.agent.md .github/agents/
 ## Credits
 
 Based on:
+
 - **Ralph Wiggum** pattern by Geoffrey Huntley
 
 ## Links
