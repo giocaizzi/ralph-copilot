@@ -2,7 +2,13 @@
 
 A Copilot implementation of the Ralph Wiggum autonomous agent loop, using custom agents with automatic handoffs.
 
-Based only off four agents markdown files, this pattern enables an autonomous coding loop with fresh context every iteration, using the filesystem as memory and git for version control.
+<p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
+
+
+
+Based only off four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and git for version control.
+
+
 
 ## What is Ralph Loop?
 
@@ -49,22 +55,22 @@ sequenceDiagram
 
 ## Features
 
-- ✅ 🤝 **Automatic handoffs** - Agents pass control automatically
-- ✅ 📊 **Progress file** - Fresh context every iteration via PROGRESS.md
-- ✅ 🌐 **Language agnostic** - Works with any programming language/stack
-- ✅ ⚛️ **Atomic tasks** - One task per iteration, committed immediately
-- ✅ 🔄 **Context reset** - Avoids context pollution, uses filesystem as memory
-- ✅ 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
+- 🤝 **Automatic handoffs** - Agents pass control automatically
+- 📊 **Progress file** - Fresh context every iteration via PROGRESS.md
+- 🌐 **Language agnostic** - Works with any programming language/stack
+- ⚛️ **Atomic tasks** - One task per iteration, committed immediately
+- 🔄 **Context reset** - Avoids context pollution, uses filesystem as memory
+- 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
 
 ## Setup
 
 ### Installation
 
-1. Copy agent files to your project:
+1. Clone repository and copy agent files to your project:
 
 ```bash
-mkdir -p .github/agents
-cp agents/*.agent.md .github/agents/
+git clone git@github.com:giocaizzi/ralph-copilot.git
+cp ralph-copilot/agents/*.agent.md .github/agents/
 ```
 
 2. Restart VSCode or reload window
@@ -100,12 +106,7 @@ cp agents/*.agent.md .github/agents/
    - Commit changes
    - Repeat until done
 
-5. **Monitor progress**:
-   ```bash
-   cat PROGRESS.md
-   git log --oneline -10
-   ```
-
+5. **Monitor progress** in PROGRESS.md and git history
 
 ## Credits
 
