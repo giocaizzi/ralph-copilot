@@ -18,7 +18,7 @@ Named after Ralph Wiggum from The Simpsons - persistent iteration beats one-shot
 
 ```mermaid
 flowchart TD
-    Human["👤 Human\Creates requirements"] --> Planner["🗂️ Planner"]
+    Human["👤 Requirements"] --> Planner["🗂️ Planner"]
     Planner -->|"Generates"| PRD["📄 PRD.md"]
     Planner -->|"Handoff button"| Coordinator
 
