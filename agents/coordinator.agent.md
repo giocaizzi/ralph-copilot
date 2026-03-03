@@ -16,8 +16,6 @@ Read PRD.md and PROGRESS.md, start looping autonomously, spawning Executor as su
 
 ## Core Principle
 
-**Ralph loop = Fresh context + Filesystem memory**
-
 Each iteration starts clean. Progress persists in files, not conversation history.
 
 ## Your Responsibilities
@@ -33,9 +31,8 @@ Each iteration starts clean. Progress persists in files, not conversation histor
    - Check nothing is blocked
 
 3. **Spawn Executor Subagent**
-   - Pass clear, specific instructions with fresh context
+   - Pass clear, specific instructions to Executor for the task
    - Include task ID, requirements, and success criteria
-   - Executor works in isolated context window
    - Receives only completion summary back
 
 4. **Spawn Reviewer Subagent**
@@ -106,13 +103,3 @@ When PROGRESS.md shows all PRD tasks are done:
 - After Executor re-runs, spawn Reviewer again
 - Repeat the Executor → Reviewer loop until Reviewer returns PASS
 - If stuck after 3 FAIL cycles on the same task: break the task into smaller sub-tasks, update PRD.md and PROGRESS.md accordingly, and restart
-
-## Context Management
-
-You have NO memory between iterations. Everything must be in files:
-- PROGRESS.md = what's done
-- PRD.md = what needs doing
-- git log = how it was done
-- Code files = current state
-
-**Trust the files, not your memory.**

@@ -104,7 +104,7 @@ Create `PRD.md` in this format:
 ## Task Sizing Principles
 
 ### ✅ Good Task Size
-Can complete in 1-5 iterations (fresh context windows):
+Can complete in 1-5 iterations:
 - "Add user authentication with JWT"
 - "Implement rate limiting middleware"
 - "Create product listing API endpoint"
@@ -218,7 +218,7 @@ Before writing PRD, clarify:
 
 ## Remember
 
-A good PRD lets an agent wake up with **zero context** and immediately know:
+A good PRD lets an agent wake up and immediately know:
 - What to build
 - How to verify success
 - Where to record progress
