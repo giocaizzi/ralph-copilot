@@ -12,23 +12,24 @@ Based off only four `agent.md` markdown files, this pattern enables an **autonom
 
 An autonomous coding pattern where:
 
-0. A human provides requirements to a Planner agent, which creates a `PRD.md` and `PROGRESS.md`
-1. Agent picks a task from `PRD.md`
-2. Executes it with **fresh context**
-3. `git` commits and updates `PROGRESS.md`
-4. Code is reviewed, tested and quality checks ensured
-5. Loops until all tasks complete
+0. User provides requirements to a `RalphPlanner` agent, which creates a `PRD.md` with a list of specific tasks and file to track progress `PROGRESS.md`
+1. User reviews `PRD.md` and starts the loop with `RalphCoordinator` agent who dispatches tasks to `RalphExecutor` agents.
+2. `RalphExecutor` agent picks a task from `PRD.md`
+3. Executes it with **fresh context**, code is tested and quality checks ensured
+4. `git` commits and updates `PROGRESS.md`
+5. Code is reviewed by `RalphReviewer`
+6. Loops until all tasks complete
 
 ### Execution Flow
 
 ```mermaid
 sequenceDiagram
-    participant H as 👤 Human
-    participant P as Planner
-    participant C as Coordinator
-    participant E as Executor
-    participant R as Reviewer
-    participant FS as 📁 Filesystem
+    participant H as 👤 User
+    participant P as 🤖 Planner
+    participant C as 🤖 Coordinator
+    participant E as 🤖 Executor
+    participant R as 🤖 Reviewer
+    participant FS as 📝 Filesystem
 
     H->>P: Requirements
     P->>FS: Write PRD.md + PROGRESS.md
@@ -55,7 +56,7 @@ sequenceDiagram
 ## Features
 
 - 🤝 **Automatic handoffs** - Agents pass control automatically with fresh context
-- 📊 **Progress file** - Fresh context every iteration via `PROGRESS.md` and `git`
+- 📝 **Progress file and filesystem memory** - Fresh context every iteration via `PROGRESS.md` and `git`
 - 🌐 **Language agnostic** - Works with any programming language/stack
 - ⚛️ **Atomic tasks** - One task per iteration, committed immediately
 - 🔄 **Context reset** - Avoids context pollution, uses filesystem as memory
