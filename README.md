@@ -63,6 +63,11 @@ sequenceDiagram
 - 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
 - ✅ **Code that lasts** - Maintainable code with tests and quality checks at every iteration
 
+## Compatibility
+
+- 🖥️ **VS Code Copilot** - save agents in the workpace `.github/agents` or [customize your settings.json](#Installation)
+- 🤖 **Copilot CLI** - save agents in workspace `.github/agents` or in global `~/.copilot/agents`
+
 ## Setup
 
 ### Installation
@@ -74,15 +79,16 @@ git clone git@github.com:giocaizzi/ralph-copilot.git
 cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 ```
 
-2. Restart VSCode or reload window
+2. Restart VSCode/Copilot CLI
 
 3. Verify agents are available:
    - Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
    - Type "Select Agent"
    - Should see: `RalphPlanner`, `RalphCoordinator`
 
-> **Tip — use Ralph globally across all your projects**
+> 💡 **Tip — use Ralph globally across all your projects**
 >
+> *VSCode*:
 > Instead of copying agent files per project, point VS Code to your local clone of this repo once via
 > [![VS Code setting chat.agentFilesLocations](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations)
 > and the agents will be available everywhere.
@@ -93,6 +99,9 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 >     "/your/path/to/ralph-copilot": true
 > }
 > ```
+>
+> *Copilot CLI*
+> Save your agents in the global folder `~/.copilot/agents`
 
 ## Usage
 
