@@ -1,10 +1,10 @@
 # Copilot Ralph Loop
 
-A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
+A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
 
 <p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
 
-Based off only four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
+Based on only four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
 
 ## What is Ralph Loop?
 
@@ -12,7 +12,7 @@ Based off only four `agent.md` markdown files, this pattern enables an **autonom
 
 An autonomous coding pattern where:
 
-0. User provides requirements to a `RalphPlanner` agent, which creates a `PRD.md` with a list of specific tasks and file to track progress `PROGRESS.md`
+0. User provides requirements to a `RalphPlanner` agent, which creates a `PRD.md` with a list of specific tasks and a file to track progress `PROGRESS.md`
 1. User reviews `PRD.md` and starts the loop with `RalphCoordinator` agent who dispatches tasks to `RalphExecutor` agents.
 2. `RalphExecutor` agent picks a task from `PRD.md`
 3. Executes it with **fresh context**, code is tested and quality checks ensured
@@ -65,7 +65,7 @@ sequenceDiagram
 
 ## Compatibility
 
-- 🖥️ **VS Code Copilot** - save agents in the workpace `.github/agents` or [customize your settings.json](#Installation)
+- 🖥️ **VS Code Copilot** - save agents in the workspace `.github/agents` or [customize your settings.json](#Installation)
 - 🤖 **Copilot CLI** - save agents in workspace `.github/agents` or in global `~/.copilot/agents`
 
 ## Setup
@@ -111,7 +111,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 
    ```
    Open VSCode Chat
-   Select: Planner agent
+   Select: RalphPlanner
    Prompt: "Create a PRD for [your feature]"
    ```
 
@@ -120,7 +120,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 3. **Start Loop** with `RalphCoordinator` agent:
 
    ```
-   Select: Coordinator agent
+   Select: RalphCoordinator
    Click: "Start Ralph Loop" handoff button
    ```
 
@@ -138,7 +138,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 
 Based on:
 
-- [**Ralph Wiggum as a "software engineer** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/)
+- [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/)
 - [Ralph](https://github.com/snarktank/ralph)
 - [VSCode Custom Agents Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 - [Claude Code Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)
