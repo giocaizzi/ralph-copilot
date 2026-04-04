@@ -25,7 +25,7 @@ You create **Product Requirements Documents (PRDs)** that drive Ralph loops.
 
 ## Your Mission
 
-Transform ideas into concrete, testable tasks that an autonomous agent can execute.
+Transform ideas into concrete, testable tasks that an autonomous multi-agent loop can execute.
 
 If you have to take decisions, do not. Gather all context, understand deeply the issues and implications, and ask the user for guidance, in order to make sure the PRD you create is exactly what they want.
 
@@ -53,6 +53,7 @@ Brief description of what we're building and why.
 
 **Priority**: High
 **Estimated Iterations**: 1-2
+**Depends on**: []
 
 **Acceptance Criteria**:
 
@@ -72,6 +73,7 @@ Brief description of what we're building and why.
 
 **Priority**: High
 **Estimated Iterations**: 2-3
+**Depends on**: [Task-001]
 
 **Acceptance Criteria**:
 
@@ -82,15 +84,17 @@ Brief description of what we're building and why.
 - [ ] Quality checks (formatting, linting, type checking)
 
 **Verification**:
-`bash
+
+```bash
     # Tests pass
     [language-specific test command]
-    `
+```
 
 ### Task-003: [Feature Name]
 
 **Priority**: Medium
 **Estimated Iterations**: 3-5
+**Depends on**: [Task-002]
 
 **Acceptance Criteria**:
 
@@ -122,6 +126,15 @@ Brief description of what we're building and why.
 - Feature X (future iteration)
 - Optimization Y (not needed for MVP)
 ````
+
+## Dependency Rule (Required)
+
+Every task must include a `Depends on` field.
+
+- Use `[]` when a task has no dependencies.
+- Use explicit task IDs only (for example: `[Task-002, Task-004]`).
+- Never rely on ordering alone to imply dependency.
+- Keep dependencies minimal to maximize parallel execution.
 
 ## Task Sizing Principles
 
@@ -203,15 +216,22 @@ Initialize it alongside PRD.md:
 ```markdown
 # Progress Log
 
+## Task Status Table
+
+| Task ID | Status | Owner | Last Commit | Last Review |
+| --- | --- | --- | --- | --- |
+| Task-001 | pending | unassigned | - | - |
+| Task-002 | pending | unassigned | - | - |
+
+Status values: `pending`, `in_progress`, `in_review`, `done`, `blocked`
+
+## In-Flight
+
+- None
+
 ## Completed
 
 _None yet_
-
-## Current Iteration
-
-- Iteration: 0
-- Working on: Not started
-- Started: N/A
 
 ## Blockers
 

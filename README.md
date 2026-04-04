@@ -5,6 +5,7 @@ A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggu
 <p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
 
 Based on only four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
+It is optimized for Copilot premium-request efficiency by increasing the amount of work done inside one coordinator request via subagent parallelism.
 
 ## What is Ralph Loop?
 
@@ -13,12 +14,12 @@ Based on only four `agent.md` markdown files, this pattern enables an **autonomo
 An autonomous coding pattern where:
 
 0. User provides requirements to a `RalphPlanner` agent, which creates a `PRD.md` with a list of specific tasks and a file to track progress `PROGRESS.md`
-1. User reviews `PRD.md` and starts the loop with `RalphCoordinator` agent who dispatches tasks to `RalphExecutor` agents.
-2. `RalphExecutor` agent picks a task from `PRD.md`
-3. Executes it with **fresh context**, code is tested and quality checks ensured
-4. `git` commits and updates `PROGRESS.md`
-5. Code is reviewed by `RalphReviewer`
-6. Loops until all tasks complete
+1. User reviews `PRD.md` and starts the loop with `RalphCoordinator`, which dispatches up to 5 `RalphExecutor` agents in parallel
+2. Coordinator schedules only tasks whose `Depends on` entries are already complete
+3. Each `RalphExecutor` executes one task with **fresh context**, commits, and updates only its task status in `PROGRESS.md`
+4. Each task is immediately reviewed by `RalphReviewer` (PASS/FAIL per task)
+5. FAIL tasks are re-run with fix instructions; PASS tasks are marked done
+6. Loop continues until all tasks are done
 
 ### Execution Flow
 
@@ -27,7 +28,7 @@ sequenceDiagram
     participant H as 👤 User
     participant P as 🤖 Planner
     participant C as 🤖 Coordinator
-    participant E as 🤖 Executor
+    participant E1 as 🤖 Executor #1..#5
     participant R as 🤖 Reviewer
     participant FS as 📝 Filesystem
 
@@ -39,15 +40,17 @@ sequenceDiagram
 
     loop Until all tasks complete
         C->>FS: Read PRD.md + PROGRESS.md
-        C->>+E: Spawn subagent (task + criteria)
-        E->>FS: Read PRD.md + PROGRESS.md
-        E->>E: Implement task
-        E->>+R: Spawn subagent (verify task)
+        C->>C: Build ready queue from Depends on
+        C->>+E1: Spawn up to 5 subagents (ready tasks)
+        E1->>FS: Read PRD.md + PROGRESS.md
+        E1->>E1: Implement one task
+        E1->>FS: Update own task row in PROGRESS.md
+        E1->>FS: git commit
+        E1->>+R: Spawn subagent (verify same task)
         R->>FS: Read code + acceptance criteria
-        R-->>-E: Verdict (pass / fail + notes)
-        E->>FS: Update PROGRESS.md
-        E->>FS: git commit
-        E-->>-C: Completion summary
+        R-->>-E1: Verdict (pass / fail + notes)
+        E1-->>-C: Task summary + review verdict
+        C->>C: PASS => done, FAIL => requeue
     end
 
     C-->>H: COMPLETE
@@ -58,9 +61,10 @@ sequenceDiagram
 - 🤝 **Automatic handoffs** - Agents pass control automatically with fresh context
 - 📝 **Progress file and filesystem memory** - Fresh context every iteration via `PROGRESS.md` and `git`
 - 🌐 **Language agnostic** - Works with any programming language/stack
-- ⚛️ **Atomic tasks** - One task per iteration, committed immediately
+- ⚛️ **Parallel atomic tasks** - Up to 5 task iterations in flight, each committed independently
 - 🔄 **Context reset** - Avoids context pollution, uses filesystem as memory
-- 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
+- 🔍 **Built-in review** - Reviewer subagent verifies every task before task completion
+- 💸 **Premium-request efficient** - More work per coordinator request via parallel subagents
 - ✅ **Code that lasts** - Maintainable code with tests and quality checks at every iteration
 
 ## Compatibility
@@ -116,6 +120,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
    ```
 
 2. **Review PRD.md** - Edit as needed
+   - Ensure every task has `Depends on: [...]`
 
 3. **Start Loop** with `RalphCoordinator` agent:
 
@@ -125,11 +130,12 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
    ```
 
 4. **Let it run** - Agents will:
-   - Pick tasks from PRD.md
-   - Execute them
-   - Update PROGRESS.md
-   - Commit changes
-   - Review, test and run quality checks
+   - Select dependency-ready tasks from PRD.md
+   - Run up to 5 executors in parallel
+   - Update task-level status in PROGRESS.md
+   - Commit changes per task
+   - Review each task immediately (PASS/FAIL)
+   - Requeue failed tasks automatically
    - Repeat until done
 
 5. **Monitor progress** in PROGRESS.md and git history
