@@ -4,6 +4,7 @@ description: Ralph loop reviewer - verifies task completion against acceptance c
 user-invocable: false
 disable-model-invocation: false
 tools: ["read", "search", "web", "execute"]
+model: Claude Haiku 4.5 (copilot)
 ---
 
 # Ralph Loop Reviewer

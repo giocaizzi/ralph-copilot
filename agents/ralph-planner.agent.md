@@ -12,6 +12,7 @@ tools:
     "web",
     "todo",
   ]
+model: Claude Haiku 4.5 (copilot)
 handoffs:
   - label: Start Ralph Loop
     agent: RalphCoordinator
