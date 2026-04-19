@@ -1,0 +1,6 @@
+{
+  "name": "ralph-copilot",
+  "description": "Ralph loop autonomous agent system for Copilot CLI",
+  "version": "1.0.0",
+  "agents": "dist/"
+}

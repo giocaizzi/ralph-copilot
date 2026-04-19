@@ -1,17 +1,7 @@
 ---
 name: RalphPlanner
 description: Creates detailed PRDs from high-level requirements
-tools:
-  [
-    "vscode",
-    "execute",
-    "read",
-    "agent",
-    "edit",
-    "search",
-    "web",
-    "todo",
-  ]
+tools: ["vscode", "execute", "read", "agent", "edit", "search", "web", "todo"]
 handoffs:
   - label: Start Ralph Loop
     agent: RalphCoordinator

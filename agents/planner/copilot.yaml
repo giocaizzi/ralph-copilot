@@ -1,0 +1,8 @@
+name: RalphPlanner
+description: Creates detailed PRDs from high-level requirements
+tools: ["vscode", "execute", "read", "agent", "edit", "search", "web", "todo"]
+handoffs:
+  - label: Start Ralph Loop
+    agent: RalphCoordinator
+    prompt: "PRD is ready. Begin Ralph loop execution. Read PRD.md and PROGRESS.md, spawn Executor subagents to complete all tasks autonomously."
+    send: false

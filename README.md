@@ -4,7 +4,7 @@ A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggu
 
 <p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
 
-Based on only four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
+Based on four agents, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
 
 ## What is Ralph Loop?
 
@@ -65,33 +65,49 @@ sequenceDiagram
 
 ## Compatibility
 
-- 🖥️ **VS Code Copilot** - save agents in the workspace `.github/agents` or [customize your settings.json](#Installation)
-- 🤖 **Copilot CLI** - save agents in workspace `.github/agents` or in global `~/.copilot/agents`
+- 🖥️ **VS Code Copilot** (Claude Code) — reads `.md` agent files
+- 🤖 **Copilot CLI** — reads `.agent.md` agent files
+
+Both formats are generated into `dist/` from a single source.
 
 ## Setup
 
-### Installation
+### Plugin install (recommended)
 
-1. Clone repository and copy agent files to your project:
+**Claude Code:**
+
+```
+/plugin install giocaizzi/ralph-copilot
+```
+
+**Copilot CLI:**
+
+```bash
+copilot plugin install giocaizzi/ralph-copilot
+```
+
+### Manual install
+
+Copy the agent files from `dist/` to your project:
 
 ```bash
 git clone git@github.com:giocaizzi/ralph-copilot.git
-cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
+
+# VS Code Copilot (Claude Code)
+cp ralph-copilot/dist/*.md <your_project>/.github/agents/
+
+# Copilot CLI
+cp ralph-copilot/dist/*.agent.md <your_project>/.github/agents/
 ```
 
-2. Restart VSCode/Copilot CLI
+Restart VS Code / Copilot CLI and verify agents are available:
+- Open Command Palette (`Cmd+Shift+P`) → "Select Agent"
+- Should see: `RalphPlanner`, `RalphCoordinator`
 
-3. Verify agents are available:
-   - Open Command Palette (`Cmd+Shift+P` / `Ctrl+Shift+P`)
-   - Type "Select Agent"
-   - Should see: `RalphPlanner`, `RalphCoordinator`
-
-> 💡 **Tip — use Ralph globally across all your projects**
+> 💡 **Use Ralph globally across all projects**
 >
-> *VSCode*:
-> Instead of copying agent files per project, point VS Code to your local clone of this repo once via
-> [![VS Code setting chat.agentFilesLocations](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations)
-> and the agents will be available everywhere.
+> *VS Code:* Point VS Code to your local clone once via
+> [![VS Code setting chat.agentFilesLocations](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations):
 >
 > ```jsonc
 > // settings.json
@@ -100,8 +116,7 @@ cp ralph-copilot/agents/*.agent.md <your_project>/.github/agents/
 > }
 > ```
 >
-> *Copilot CLI*
-> Save your agents in the global folder `~/.copilot/agents`
+> *Copilot CLI:* Save agents to the global folder `~/.copilot/agents`
 
 ## Usage
 
