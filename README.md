@@ -1,6 +1,8 @@
-# Copilot Ralph Loop
+# Ralph Loop
 
-A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
+An implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
+
+Works with **VS Code Copilot**, **Copilot CLI**, and **Claude Code**.
 
 <p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
 
@@ -65,10 +67,13 @@ sequenceDiagram
 
 ## Compatibility
 
-- 🖥️ **VS Code Copilot** (Claude Code) — reads `.md` agent files
-- 🤖 **Copilot CLI** — reads `.agent.md` agent files
+| Harness | Format | Install method |
+|---|---|---|
+| VS Code Copilot | `.md` | plugin or manual |
+| Claude Code | `.md` | `/plugin install` |
+| Copilot CLI | `.agent.md` | plugin or manual |
 
-Both formats are generated into `dist/` from a single source.
+Both formats are generated into `dist/` from a single source via `make build`.
 
 ## Setup
 
@@ -88,25 +93,23 @@ copilot plugin install giocaizzi/ralph-copilot
 
 ### Manual install
 
-Copy the agent files from `dist/` to your project:
+Clone and copy agent files to your project's `.github/agents/` directory:
 
 ```bash
 git clone git@github.com:giocaizzi/ralph-copilot.git
 
-# VS Code Copilot (Claude Code)
+# VS Code Copilot or Claude Code
 cp ralph-copilot/dist/*.md <your_project>/.github/agents/
 
 # Copilot CLI
 cp ralph-copilot/dist/*.agent.md <your_project>/.github/agents/
 ```
 
-Restart VS Code / Copilot CLI and verify agents are available:
-- Open Command Palette (`Cmd+Shift+P`) → "Select Agent"
-- Should see: `RalphPlanner`, `RalphCoordinator`
+Restart your agent harness and verify agents are available — you should see `RalphPlanner` and `RalphCoordinator`.
 
 > 💡 **Use Ralph globally across all projects**
 >
-> *VS Code:* Point VS Code to your local clone once via
+> *VS Code Copilot / Claude Code:* Point VS Code to your local clone once via
 > [![VS Code setting chat.agentFilesLocations](https://img.shields.io/badge/VS%20Code-chat.agentFilesLocations-007ACC?style=flat&logo=visualstudiocode&logoColor=white)](vscode://settings/chat.agentFilesLocations):
 >
 > ```jsonc
@@ -155,5 +158,6 @@ Based on:
 
 - [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/)
 - [Ralph](https://github.com/snarktank/ralph)
-- [VSCode Custom Agents Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
+- [VS Code Custom Agents Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
+- [Claude Code Custom Agents Docs](https://docs.anthropic.com/en/docs/claude-code/custom-agents)
 - [Claude Code Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)
