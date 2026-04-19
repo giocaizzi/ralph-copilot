@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "ralph-copilot",
-      "source": ".",
+      "source": "./",
       "description": "Ralph loop autonomous agent system for Claude Code",
       "version": "1.0.0",
       "keywords": ["agents", "autonomous", "loop"]
