@@ -1,0 +1,19 @@
+{
+  "name": "ralph-copilot",
+  "owner": {
+    "name": "giocaizzi",
+    "url": "https://github.com/giocaizzi"
+  },
+  "metadata": {
+    "description": "Ralph loop autonomous agent system for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "ralph-copilot",
+      "source": ".",
+      "description": "Ralph loop autonomous agent system for Claude Code",
+      "version": "1.0.0",
+      "keywords": ["agents", "autonomous", "loop"]
+    }
+  ]
+}
