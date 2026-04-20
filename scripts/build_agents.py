@@ -7,8 +7,8 @@ Source layout (edit here):
   agents/<name>/claude.yaml         Claude Code frontmatter fields
 
 Generated output (do not edit):
-  agents/dist/claude/<name>.md      Claude Code format
-  agents/dist/copilot/<name>.agent.md  Copilot CLI format
+  dist/agents/<name>.md             Claude Code format
+  dist/copilot/<name>.agent.md      Copilot CLI format
 """
 
 from __future__ import annotations
@@ -19,7 +19,8 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).parent.parent
 AGENTS_ROOT = REPO_ROOT / "agents"
-DIST = REPO_ROOT / "dist"
+DIST_AGENTS = REPO_ROOT / "dist" / "agents"
+DIST_COPILOT = REPO_ROOT / "dist" / "copilot"
 
 def _render(frontmatter_yaml: str, body: str) -> str:
     return f"---\n{frontmatter_yaml.strip()}\n---\n\n{body.strip()}\n"
@@ -37,8 +38,8 @@ def build_agent(name: str, *, check: bool = False) -> bool:
     claude_fm = (src / "claude.yaml").read_text()
 
     targets = {
-        DIST / f"{name}.md": _render(claude_fm, body),
-        DIST / f"{name}.agent.md": _render(copilot_fm, body),
+        DIST_AGENTS / f"{name}.md": _render(claude_fm, body),
+        DIST_COPILOT / f"{name}.agent.md": _render(copilot_fm, body),
     }
 
     ok = True
@@ -58,7 +59,8 @@ def main() -> None:
     parser.add_argument("--check", action="store_true", help="Validate generated files are up to date (exit 1 if not)")
     args = parser.parse_args()
 
-    DIST.mkdir(parents=True, exist_ok=True)
+    DIST_AGENTS.mkdir(parents=True, exist_ok=True)
+    DIST_COPILOT.mkdir(parents=True, exist_ok=True)
 
     agents = sorted(
         d.name for d in AGENTS_ROOT.iterdir()

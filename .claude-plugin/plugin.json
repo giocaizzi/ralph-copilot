@@ -1,6 +1,6 @@
 {
   "name": "ralph-copilot",
   "description": "Ralph loop autonomous agent system for Claude Code",
-  "version": "1.0.0",
-  "agents": "dist/"
+  "version": "1.0.1",
+  "agents": "./dist/agents/"
 }
