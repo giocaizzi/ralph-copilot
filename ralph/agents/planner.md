@@ -1,8 +1,7 @@
 ---
-name: planner
-description: Creates detailed PRDs from high-level requirements. Use when starting a new feature or project with Ralph — ask clarifying questions then produce PRD.md and PROGRESS.md.
+description: Creates detailed PRDs from high-level requirements. Use when starting a new feature or project with Ralph - ask clarifying questions then produce PRD.md and PROGRESS.md.
+name: RalphPlanner
 tools: Read, Edit, Write, Bash, Grep, Glob, WebSearch, Agent
-model: sonnet
 ---
 
 # Ralph Loop Planner

@@ -1,8 +1,8 @@
 ---
-name: executor
 description: Ralph loop executor - implements tasks assigned by coordinator. Spawned by coordinator, not invoked directly by users.
-tools: Read, Edit, Write, Bash, Grep, Glob, WebSearch
-model: sonnet
+name: RalphExecutor
+user-invocable: false
+tools: ["vscode", "execute", "read", "edit", "search", "web", "todo"]
 ---
 
 # Ralph Loop Executor

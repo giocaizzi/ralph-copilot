@@ -1,8 +1,7 @@
 ---
-name: coordinator
 description: Ralph loop coordinator - manages autonomous task execution with subagents. Use when running the Ralph loop, orchestrating executor and reviewer subagents, or resuming an in-progress PRD.
+name: RalphCoordinator
 tools: Read, Bash, Grep, Glob, WebSearch, Agent
-model: sonnet
 ---
 
 # Ralph Loop Coordinator

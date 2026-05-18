@@ -1,7 +1,18 @@
-.PHONY: build validate
+.PHONY: help build validate clean
 
-build: ## Generate dual-format agent files from agents/
-	python scripts/build_agents.py
+help: ## Show available targets.
+	@echo Usage: make '<target>'
+	@echo.
+	@echo Targets:
+	@echo   build       Generate root agents, copilot agents, and Copilot manifest
+	@echo   validate    Validate generated files, manifests, marketplace, and README sync
+	@echo   clean       Remove generated plugin artifacts
 
-validate: ## Validate generated agent files are up to date
-	python scripts/build_agents.py --check
+build: ## Generate root agents, Copilot agents, and Copilot manifest.
+	@python scripts/build_agents.py
+
+validate: ## Validate generated files, manifests, marketplace, and README sync.
+	@python scripts/validate.py
+
+clean: ## Remove generated plugin artifacts.
+	@python scripts/build_agents.py --clean

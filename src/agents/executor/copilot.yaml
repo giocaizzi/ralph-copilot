@@ -1,4 +1,3 @@
 name: RalphExecutor
-description: Ralph loop executor - implements tasks
-user-invokable: false
+user-invocable: false
 tools: ["vscode", "execute", "read", "edit", "search", "web", "todo"]

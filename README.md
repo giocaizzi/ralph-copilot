@@ -65,6 +65,15 @@ sequenceDiagram
 - 🔍 **Built-in review** - Reviewer subagent verifies every task before moving on
 - ✅ **Code that lasts** - Maintainable code with tests and quality checks at every iteration
 
+## Agents
+
+| Agent | Role |
+|---|---|
+| `coordinator` | Orchestrates the Ralph loop and dispatches the executor and reviewer. |
+| `executor` | Implements one task at a time with fresh context. |
+| `planner` | Creates `PRD.md` and `PROGRESS.md` from high-level requirements. |
+| `reviewer` | Verifies completed work against the task acceptance criteria. |
+
 ## Compatibility
 
 | Harness | Format | Install method |
@@ -73,7 +82,18 @@ sequenceDiagram
 | Claude Code | `.md` | `/plugin install` |
 | Copilot CLI | `.agent.md` | plugin or manual |
 
-Both formats are generated into `dist/` from a single source via `make build`.
+Claude-format `.md` files and Copilot-format `.agent.md` files are generated under `ralph/` from `src/agents/` via `make build`.
+
+## Repository Layout
+
+```text
+.claude-plugin/marketplace.json            Marketplace entry point
+src/agents/<agent>/                        Authored shared source
+ralph/.claude-plugin/plugin.json           Authored Claude plugin manifest
+ralph/agents/                              Generated Claude agents
+ralph/copilot/                             Generated Copilot/VS Code agents
+ralph/.github/plugin/                      Generated Copilot plugin manifest
+```
 
 ## Setup
 
@@ -82,27 +102,29 @@ Both formats are generated into `dist/` from a single source via `make build`.
 **Claude Code:**
 
 ```
-/plugin install giocaizzi/ralph-copilot
+/plugin install ralph@<marketplace-name>
 ```
 
 **Copilot CLI:**
 
 ```bash
-copilot plugin install giocaizzi/ralph-copilot
+copilot plugin install ralph@<marketplace-name>
 ```
 
 ### Manual install
 
-Clone and copy agent files to your project's `.github/agents/` directory:
+Clone and build the plugin, then copy the generated agent files to your project's agent directories:
 
 ```bash
 git clone git@github.com:giocaizzi/ralph-copilot.git
+cd ralph-copilot
+make build
 
-# VS Code Copilot or Claude Code
-cp ralph-copilot/dist/*.md <your_project>/.github/agents/
+# Claude Code (.claude/agents) or VS Code Claude-format discovery
+cp ralph/agents/*.md <your_project>/.claude/agents/
 
-# Copilot CLI
-cp ralph-copilot/dist/*.agent.md <your_project>/.github/agents/
+# VS Code Copilot / Copilot CLI
+cp ralph/copilot/*.agent.md <your_project>/.github/agents/
 ```
 
 Restart your agent harness and verify agents are available — you should see `RalphPlanner` and `RalphCoordinator`.
@@ -115,7 +137,7 @@ Restart your agent harness and verify agents are available — you should see `R
 > ```jsonc
 > // settings.json
 > "chat.agentFilesLocations": {
->     "/your/path/to/ralph-copilot": true
+>     "/your/path/to/ralph": true
 > }
 > ```
 >

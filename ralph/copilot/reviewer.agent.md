@@ -1,8 +1,8 @@
 ---
-name: reviewer
-description: Ralph loop reviewer - verifies task completion against acceptance criteria. Spawned by coordinator after each executor run, not invoked directly.
-tools: Read, Bash, Grep, Glob, WebSearch
-model: sonnet
+name: RalphReviewer
+description: Ralph loop reviewer - verifies task completion against acceptance criteria as subagent
+user-invocable: false
+tools: ["read", "search", "web", "execute"]
 ---
 
 # Ralph Loop Reviewer

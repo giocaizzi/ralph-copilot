@@ -1,4 +1,3 @@
 name: executor
 description: Ralph loop executor - implements tasks assigned by coordinator. Spawned by coordinator, not invoked directly by users.
-tools: Read, Edit, Write, Bash, Grep, Glob, WebSearch
-model: sonnet
+plugin: ralph

@@ -1,0 +1,20 @@
+{
+  "name": "ralph",
+  "version": "1.0.1",
+  "description": "Ralph loop autonomous agent system for Claude Code, Copilot CLI and VS Code",
+  "author": {
+    "name": "giocaizzi",
+    "url": "https://github.com/giocaizzi"
+  },
+  "repository": "https://github.com/giocaizzi/ralph-copilot",
+  "keywords": [
+    "agents",
+    "autonomous",
+    "loop",
+    "copilot",
+    "claude"
+  ],
+  "agents": [
+    "./copilot/"
+  ]
+}

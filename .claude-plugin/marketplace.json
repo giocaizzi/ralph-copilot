@@ -1,17 +1,18 @@
 {
-  "name": "ralph-copilot",
+  "name": "ralph",
   "owner": {
     "name": "giocaizzi",
     "url": "https://github.com/giocaizzi"
   },
   "metadata": {
-    "description": "Ralph loop autonomous agent system for Claude Code"
+    "description": "Ralph loop autonomous agent system for Claude Code, Copilot CLI and VS Code",
+    "version": "1.0.1"
   },
   "plugins": [
     {
-      "name": "ralph-copilot",
-      "source": "./",
-      "description": "Ralph loop autonomous agent system for Claude Code",
+      "name": "ralph",
+      "source": "./ralph",
+      "description": "Ralph loop autonomous agent system for Claude Code, Copilot CLI and VS Code",
       "version": "1.0.1",
       "keywords": ["agents", "autonomous", "loop"]
     }

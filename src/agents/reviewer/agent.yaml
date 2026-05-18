@@ -1,4 +1,3 @@
 name: reviewer
 description: Ralph loop reviewer - verifies task completion against acceptance criteria. Spawned by coordinator after each executor run, not invoked directly.
-tools: Read, Bash, Grep, Glob, WebSearch
-model: sonnet
+plugin: ralph
