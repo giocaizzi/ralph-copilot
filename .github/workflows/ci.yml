@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  check:
+    needs: [secrets]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail if a needed job did not succeed
+        if: needs.secrets.result != 'success'
+        run: exit 1
+      - uses: actions/checkout@v6
+      - run: make check
