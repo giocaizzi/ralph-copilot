@@ -1,0 +1,29 @@
+name: Label guard
+
+# Copied verbatim into every repo by `sync.sh apply workflows`.
+# Deletes any label that is not in giocaizzi/.github standard/labels.yaml as soon as it is created or renamed.
+on:
+  label:
+    types: [created, edited]
+
+permissions:
+  issues: write
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete non-standard label
+        env:
+          GH_TOKEN: ${{ github.token }}
+          LABEL: ${{ github.event.label.name }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/giocaizzi/.github/main/standard/labels.yaml \
+            | grep -oE 'name: ("[^"]+"|[^,}]+)' | sed -E 's/name: //; s/"//g' > standard.txt
+          if grep -qxF "$LABEL" standard.txt; then
+            echo "OK: $LABEL"
+          else
+            echo "::warning::Deleting non-standard label: $LABEL (see giocaizzi/.github docs/standard.md)"
+            gh label delete "$LABEL" --yes -R "$REPO"
+          fi
