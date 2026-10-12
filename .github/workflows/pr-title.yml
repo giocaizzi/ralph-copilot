@@ -1,0 +1,32 @@
+name: PR title
+
+# Copied verbatim into every repo by `sync.sh apply workflows`. Required check: `Validate PR title`.
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  merge_group:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate PR title
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR title format
+        # release-please opens its own release PRs; skip at the STEP level so the
+        # job still reports success (a job-level skip leaves the required check pending).
+        if: ${{ github.event_name == 'pull_request' && !startsWith(github.head_ref, 'release-please--') }}
+        # Read from env, never interpolated into the script: a title cannot inject shell.
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          types='feat|fix|perf|refactor|revert|docs|style|test|build|ci|chore'
+          re="^(${types})(\([a-z0-9._/-]+\))?!?: [a-z].*$"
+          if [[ "$TITLE" =~ $re ]]; then
+            echo "OK: $TITLE"
+          else
+            echo "::error::PR title must be 'type(scope): lowercase description', type in ${types//|/, }. Got: $TITLE"
+            exit 1
+          fi
