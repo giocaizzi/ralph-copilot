@@ -1,8 +1,19 @@
+<div align="center">
+
+<img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot">
+
 # Copilot Ralph Loop
 
-A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
+**Autonomous coding loop for GitHub Copilot, built from four custom agents.**
 
-<p align="center"><img src="assets/ralph-copilot.png" height="200" alt="Ralph Copilot"></p>
+[![CI](https://github.com/giocaizzi/ralph-copilot/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/giocaizzi/ralph-copilot/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+</div>
+
+---
+
+A lightweight Copilot implementation of the autonomous agent loop [**Ralph Wiggum as a "software engineer"** pattern by Geoffrey Huntley](https://ghuntley.com/ralph/), using custom agents with automatic handoffs.
 
 Based on only four `agent.md` markdown files, this pattern enables an **autonomous coding loop** with **fresh context every iteration**, using the filesystem as memory and `git` for version control.
 
@@ -142,3 +153,7 @@ Based on:
 - [Ralph](https://github.com/snarktank/ralph)
 - [VSCode Custom Agents Docs](https://code.visualstudio.com/docs/copilot/customization/custom-agents)
 - [Claude Code Ralph Loop](https://github.com/anthropics/claude-code/blob/main/plugins/ralph-wiggum/README.md)
+
+## License
+
+[MIT](LICENSE)
