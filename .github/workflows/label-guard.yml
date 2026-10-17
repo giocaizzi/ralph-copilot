@@ -1,12 +1,14 @@
 name: Label guard
 
 # Copied verbatim into every repo by `sync.sh apply workflows`.
-# Deletes any label that is not in giocaizzi/.github standard/labels.yaml as soon as it is created or renamed.
+# Deletes any label that is neither in giocaizzi/.github standard/labels.yaml nor in this repo's
+# .github/labels.yaml (optional per-repo extras) as soon as it is created or renamed.
 on:
   label:
     types: [created, edited]
 
 permissions:
+  contents: read
   issues: write
 
 jobs:
@@ -19,11 +21,12 @@ jobs:
           LABEL: ${{ github.event.label.name }}
           REPO: ${{ github.repository }}
         run: |
-          curl -fsSL https://raw.githubusercontent.com/giocaizzi/.github/main/standard/labels.yaml \
-            | grep -oE 'name: ("[^"]+"|[^,}]+)' | sed -E 's/name: //; s/"//g' > standard.txt
-          if grep -qxF "$LABEL" standard.txt; then
+          { curl -fsSL https://raw.githubusercontent.com/giocaizzi/.github/main/standard/labels.yaml
+            gh api "repos/$REPO/contents/.github/labels.yaml" -H 'Accept: application/vnd.github.raw' 2>/dev/null || true
+          } | grep -oE 'name: ("[^"]+"|[^,}]+)' | sed -E 's/name: //; s/"//g' > allowed.txt
+          if grep -qxF "$LABEL" allowed.txt; then
             echo "OK: $LABEL"
           else
-            echo "::warning::Deleting non-standard label: $LABEL (see giocaizzi/.github docs/standard.md)"
+            echo "::warning::Deleting non-standard label: $LABEL (keep it by adding it to .github/labels.yaml; see giocaizzi/.github docs/standard.md)"
             gh label delete "$LABEL" --yes -R "$REPO"
           fi
