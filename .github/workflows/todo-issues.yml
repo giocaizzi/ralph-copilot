@@ -1,0 +1,31 @@
+name: TODO issues
+
+# Copied verbatim into every repo by `sync.sh apply workflows`.
+# Opens a `todo` issue for each TODO comment a push to main adds, and closes it when the comment is removed.
+# Bootstrap: a manual run (`gh workflow run todo-issues.yml`) imports every TODO added since the first commit;
+# an issue with the same title (open or closed) is never duplicated.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  todo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: ${{ github.event_name == 'workflow_dispatch' && '0' || '1' }}
+      - id: root
+        if: github.event_name == 'workflow_dispatch'
+        run: echo "sha=$(git rev-list --max-parents=0 HEAD | tail -1)" >> "$GITHUB_OUTPUT"
+      - uses: alstr/todo-to-issue-action@v5
+        with:
+          IDENTIFIERS: '[{"name": "TODO", "labels": ["todo"]}]'
+        env:
+          MANUAL_COMMIT_REF: ${{ steps.root.outputs.sha && github.sha || '' }}
+          MANUAL_BASE_REF: ${{ steps.root.outputs.sha }}
