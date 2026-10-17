@@ -1,13 +1,12 @@
 name: TODO issues
 
 # Copied verbatim into every repo by `sync.sh apply workflows`.
-# Opens a `todo` issue for each to-do comment a push to main adds, and closes it when the comment is removed.
+# Opens a `todo` issue for each to-do comment a push to the default branch adds, and closes it when the comment is removed.
 # Bootstrap: a manual run (`gh workflow run todo-issues.yml`) imports the ones added since the first commit;
 # an issue with the same title (open or closed) is never duplicated.
 # Never write the uppercase keyword in a comment here: the action would turn that line into an issue.
 on:
   push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +15,8 @@ permissions:
 
 jobs:
   todo:
+    # the default branch only, whatever its name (`branches:` cannot read it)
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
