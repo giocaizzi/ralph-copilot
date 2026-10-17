@@ -1,9 +1,10 @@
 name: TODO issues
 
 # Copied verbatim into every repo by `sync.sh apply workflows`.
-# Opens a `todo` issue for each TODO comment a push to main adds, and closes it when the comment is removed.
-# Bootstrap: a manual run (`gh workflow run todo-issues.yml`) imports every TODO added since the first commit;
+# Opens a `todo` issue for each to-do comment a push to main adds, and closes it when the comment is removed.
+# Bootstrap: a manual run (`gh workflow run todo-issues.yml`) imports the ones added since the first commit;
 # an issue with the same title (open or closed) is never duplicated.
+# Never write the uppercase keyword in a comment here: the action would turn that line into an issue.
 on:
   push:
     branches: [main]
